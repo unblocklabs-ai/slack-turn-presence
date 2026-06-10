@@ -1,6 +1,6 @@
 {
   "name": "@unblocklabs/slack-turn-presence",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "OpenClaw plugin: nudges silent long-running Slack-origin turns to post user-facing progress.",
   "type": "module",
   "main": "./dist/index.js",

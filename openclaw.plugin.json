@@ -1,7 +1,7 @@
 {
   "id": "slack-turn-presence",
   "name": "Slack Turn Presence",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Nudges silent long-running Slack-origin agent turns to post a brief user-facing progress update.",
   "activation": {
     "onStartup": true,
