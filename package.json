@@ -1,0 +1,99 @@
+{
+  "name": "@unblocklabs/slack-turn-presence",
+  "version": "0.1.2",
+  "description": "OpenClaw plugin: nudges silent long-running Slack-origin turns to post user-facing progress.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "plugin:inspect": "plugin-inspector check --config plugin-inspector.config.json --no-openclaw",
+    "plugin:inspect:runtime": "plugin-inspector check --config plugin-inspector.config.json --no-openclaw --runtime --mock-sdk --allow-execute",
+    "preflight": "npm run build && npm test && npm run plugin:inspect && npm run plugin:inspect:runtime && npm pack --dry-run",
+    "release": "bash ./scripts/release.sh",
+    "test": "npm run build && node --test index.test.mjs",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@openclaw/plugin-inspector": "^0.3.10",
+    "@types/node": "^22.0.0",
+    "openclaw": ">=2026.4.22",
+    "typescript": "^5.9.0"
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "runtimeExtensions": [
+      "./dist/index.js"
+    ],
+    "install": {
+      "npmSpec": "@unblocklabs/slack-turn-presence",
+      "defaultChoice": "npm",
+      "minHostVersion": ">=2026.4.22"
+    },
+    "release": {
+      "publishToClawHub": false,
+      "publishToNpm": true
+    },
+    "compat": {
+      "pluginApi": ">=2026.4.22",
+      "minGatewayVersion": ">=2026.4.22"
+    },
+    "build": {
+      "openclawVersion": "2026.4.22",
+      "pluginSdkVersion": "2026.4.22"
+    }
+  },
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "slack",
+    "presence",
+    "progress"
+  ],
+  "license": "MIT",
+  "author": "Unblock Labs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unblocklabs-ai/slack-turn-presence.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.4.22"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "files": [
+    "README.md",
+    "RELEASING.md",
+    "index.ts",
+    "index.test.mjs",
+    "plugin-handlers.ts",
+    "plugin-inspector.config.json",
+    "scripts/",
+    "tsconfig.json",
+    "dist/",
+    "openclaw.plugin.json"
+  ],
+  "bugs": {
+    "url": "https://github.com/unblocklabs-ai/slack-turn-presence/issues"
+  },
+  "homepage": "https://github.com/unblocklabs-ai/slack-turn-presence#readme",
+  "dependencies": {
+    "undici-types": "^6.21.0"
+  }
+}

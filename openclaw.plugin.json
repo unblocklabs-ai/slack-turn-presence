@@ -1,0 +1,66 @@
+{
+  "id": "slack-turn-presence",
+  "name": "Slack Turn Presence",
+  "version": "0.1.2",
+  "description": "Nudges silent long-running Slack-origin agent turns to post a brief user-facing progress update.",
+  "activation": {
+    "onStartup": true,
+    "onChannels": [
+      "slack"
+    ],
+    "onCapabilities": [
+      "hook"
+    ]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "default": true
+      },
+      "channels": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "default": [
+          "slack"
+        ]
+      },
+      "initialDelayMs": {
+        "type": "integer",
+        "minimum": 1,
+        "default": 180000
+      },
+      "repeatMs": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "maxNudgesPerTurn": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 1
+      },
+      "minObservedActivityBeforeNudge": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 1
+      },
+      "nudgeText": {
+        "type": "string",
+        "minLength": 1,
+        "default": "You are still running in Slack and the user has not seen an update for about 3 minutes. If work is continuing, send a brief user-facing progress update via the normal user-facing message path and keep working. Do not stop solely because of this nudge."
+      }
+    }
+  }
+}

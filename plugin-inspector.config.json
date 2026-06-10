@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "plugin": {
+    "id": "slack-turn-presence",
+    "priority": "high",
+    "seams": [
+      "plugin-runtime"
+    ],
+    "sourceRoot": ".",
+    "expect": {
+      "hooks": [
+        "message_received",
+        "message_sent",
+        "gateway_stop"
+      ]
+    }
+  },
+  "capture": {
+    "mockSdk": true
+  }
+}
